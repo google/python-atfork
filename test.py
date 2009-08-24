@@ -26,6 +26,10 @@ status = 0
 test_dir = os.path.join(top_dir, 'atfork', 'tests')
 for test_file in os.listdir(test_dir):
     test_path = os.path.join(test_dir,test_file)
-    print 'Running', test_path
-    status += os.system("'%s' '%s'" % (sys.executable, test_path))
-sys.exit(status != 0)
+    test_command = "'%s' '%s'" % (sys.executable, test_path)
+    print 'Running', test_command
+    status += os.system(test_command)
+
+if status:
+    sys.exit(1)
+sys.exit(0)
