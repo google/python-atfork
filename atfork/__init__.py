@@ -52,6 +52,7 @@ import traceback
 
 
 __all__ = ('monkeypatch_os_fork_functions', 'atfork')
+__version__ = '0.1.1'
 
 
 def monkeypatch_os_fork_functions():
