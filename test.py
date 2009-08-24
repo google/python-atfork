@@ -25,6 +25,8 @@ os.environ['PYTHONPATH'] = top_dir
 status = 0
 test_dir = os.path.join(top_dir, 'atfork', 'tests')
 for test_file in os.listdir(test_dir):
+    if not test_file.endswith('.py'):
+        continue
     test_path = os.path.join(test_dir,test_file)
     test_command = "'%s' '%s'" % (sys.executable, test_path)
     print 'Running', test_command
