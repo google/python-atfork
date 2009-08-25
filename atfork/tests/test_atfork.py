@@ -197,5 +197,16 @@ class AtforkTest(unittest.TestCase):
         self._test_fork_failure('_orig_os_forkpty', atfork.os_forkpty_wrapper)
 
 
+    def test_multiple_monkeypatch_safe(self):
+        self.assertNotEqual(atfork._orig_os_fork, atfork.os_fork_wrapper)
+        self.assertNotEqual(atfork._orig_os_forkpty, atfork.os_forkpty_wrapper)
+        atfork.monkeypatch_os_fork_functions()
+        self.assertNotEqual(atfork._orig_os_fork, atfork.os_fork_wrapper)
+        self.assertNotEqual(atfork._orig_os_forkpty, atfork.os_forkpty_wrapper)
+        atfork.monkeypatch_os_fork_functions()
+        self.assertNotEqual(atfork._orig_os_fork, atfork.os_fork_wrapper)
+        self.assertNotEqual(atfork._orig_os_forkpty, atfork.os_forkpty_wrapper)
+
+
 if __name__ == '__main__':
     unittest.main()

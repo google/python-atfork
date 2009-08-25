@@ -20,8 +20,10 @@
 
 from distutils.core import setup
 
+import atfork
+
 setup(name='atfork',
-      version='0.1',
+      version=atfork.__version__,
       author='Gregory P. Smith',
       author_email='greg@krypto.org',
       url='http://code.google.com/p/python-atfork/',
