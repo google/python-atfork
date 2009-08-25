@@ -49,12 +49,13 @@ class Error(Exception):
 
 
 def fix_logging_module():
-    if 'logging' in sys.modules:
+    logging = sys.modules.get('logging')
+    # Prevent fixing multiple times as that would cause a deadlock.
+    if logging and getattr(logging, 'fixed_for_atfork', None):
+        return
+    if logging:
         warnings.warn('logging module already imported before fixup.')
     import logging
-    # Prevent fixing multiple times as that would cause a deadlock.
-    if getattr(logging, 'fixed_for_atfork', None):
-        return
     if logging.getLogger().handlers:
         # We could register each lock with atfork for these handlers but if
         # these exist, other loggers or not yet added handlers could as well.
